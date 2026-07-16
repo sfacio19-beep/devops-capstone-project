@@ -50,15 +50,17 @@ def create_accounts():
     account.deserialize(request.get_json())
     account.create()
     message = account.serialize()
-    location_url = "/"  # Remove once get_accounts has been implemented
+    location_url = "/"
     return make_response(
-        jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
+        jsonify(message),
+        status.HTTP_201_CREATED,
+        {"Location": location_url},
     )
+
 
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
-
 
 @app.route("/accounts", methods=["GET"])
 def list_accounts():
@@ -73,6 +75,7 @@ def list_accounts():
 
     app.logger.info("Returning [%s] accounts", len(account_list))
     return jsonify(account_list), status.HTTP_200_OK
+
 
 ######################################################################
 # READ AN ACCOUNT
@@ -95,6 +98,7 @@ def get_accounts(account_id):
         )
 
     return account.serialize(), status.HTTP_200_OK
+
 
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
@@ -121,6 +125,7 @@ def update_accounts(account_id):
 
     return account.serialize(), status.HTTP_200_OK
 
+
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
@@ -132,7 +137,10 @@ def delete_accounts(account_id):
     Delete an Account
     This endpoint will delete an Account
     """
-    app.logger.info("Request to delete an Account with id: %s", account_id)
+    app.logger.info(
+        "Request to delete an Account with id: %s",
+        account_id,
+    )
 
     account = Account.find(account_id)
     if account:
