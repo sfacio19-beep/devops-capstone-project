@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: accounts
   name: accounts
@@ -17,7 +16,7 @@ spec:
     spec:
       containers:
       - name: accounts
-        image: us.icr.io/$SN_ICR_NAMESPACE/accounts:1
+        image: us.icr.io/sn-labs-sfacio19/accounts:1
         ports:
         - containerPort: 8080
         env:
@@ -38,3 +37,4 @@ spec:
             secretKeyRef:
               name: postgresql
               key: database-user
+      restartPolicy: Always
